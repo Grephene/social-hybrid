@@ -1,0 +1,49 @@
+type User {
+  id: ID! @unique
+  address: String!
+  name: String
+  profilePhoto: String
+}
+
+type CommentThread {
+  id: ID! @unique
+  comments: [Comment!]!
+}
+
+type Comment {
+  id: ID! @unique
+  author: User!
+  text: String!
+  time: DateTime!
+}
+
+# type Vote {
+#   id: ID! @unique
+#   votesYae: Int!
+#   votesNay: Int!
+#   tokenSupply: Int!
+#   quorom: Int!
+#   quorumProgress: Int!
+#   support: Int!
+#   ready: Boolean!
+#   endDate: DateTime
+#   open: Boolean
+#   data: VoteData
+# }
+#
+# type VoteData {
+#   id: ID! @unique
+#   creator: User
+#   metadata: String
+#   question: String
+#   description: String
+#   nay: Int
+#   totalVoters: Int
+#   yea: Int
+# }
+
+# enum VoteStatus {
+#   ONGOING
+#   ACCEPTED
+#   REJECTED
+# }

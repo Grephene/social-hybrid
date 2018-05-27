@@ -8,43 +8,43 @@ import PostComment from './PostComment'
 const fakeAuthor = {
   name: '',
   address: '0x',
-  profilePhoto: 'https://s3.amazonaws.com/workflo/ethba/Love.jpeg'
+  profilePhoto: 'https://s3.amazonaws.com/workflo/ethba/Love.jpeg',
 }
 
-const AllComments = ({ data }) => {
+const OffchainComments = ({ data, messages }) => {
   if (data.loading) return <div>Loading...</div>
   const { commentThreads } = data
   const comments = commentThreads[0]
   return (
     <div>
-      <PostComment author={fakeAuthor} />
       <Table
         header={
           <TableRow>
-            <TableHeader title='User' />
+            <TableHeader title="Facebook User" />
           </TableRow>
         }
       >
-        { comments &&
-          [...comments.comments].map(comment => <Comment comment={comment} key={comment.time} />)
-        }
+        {comments &&
+          [...comments.comments].map(comment => (
+            <Comment comment={comment} key={comment.time} />
+          ))}
       </Table>
     </div>
   )
 }
 
 export default graphql(gql`
-query {
-  commentThreads(where: { id: "cjhnmgvq8qn9g0b62a00dz1hl" }) {
-     comments {
-       author {
-         name
-         address
-         profilePhoto
-       }
-       text
-       time
-     }
-   }
- }
-`)(AllComments)
+  query {
+    commentThreads(where: { id: "cjhnmgvq8qn9g0b62a00dz1hl" }) {
+      comments {
+        author {
+          name
+          address
+          profilePhoto
+        }
+        text
+        time
+      }
+    }
+  }
+`)(OffchainComments)

@@ -1,16 +1,18 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import { TextInput, Text, Button, theme } from '@aragon/ui'
 import styled from 'styled-components'
 
 const PostComment = ({ author }) => (
   <div>
-    <Text.Block size='xxlarge'>Post a comment</Text.Block>
+    <Text.Block size="xxlarge">Post a comment</Text.Block>
     <Comment>
-      <img src={author.profilePhoto} width='32' style={{
-        borderRadius: 16
-      }} />
+      <img
+        src={author.profilePhoto}
+        width="32"
+        style={{
+          borderRadius: 16,
+        }}
+      />
       <TextInput />
     </Comment>
   </div>

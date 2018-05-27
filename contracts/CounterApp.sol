@@ -1,37 +1,26 @@
 pragma solidity ^0.4.4;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
-import "@aragon/os/contracts/lib/zeppelin/math/SafeMath.sol";
 
 contract CounterApp is AragonApp {
-    using SafeMath for uint256;
 
-    /// Events
-    event Increment(address indexed entity, uint256 step);
-    event Decrement(address indexed entity, uint256 step);
+  bytes32 constant public POST_COMMENT_ROLE = keccak256("POST_COMMENT_ROLE");
 
-    /// State
-    uint256 public value;
+  event Message(string text, address user, uint64 time );
 
-    /// ACL
-    bytes32 constant public INCREMENT_ROLE = keccak256("INCREMENT_ROLE");
-    bytes32 constant public DECREMENT_ROLE = keccak256("DECREMENT_ROLE");
+  mapping(address => string) public nicknames;
+  mapping(address => string) public profilePics;
 
-    /**
-     * @notice Increment the counter by `step`
-     * @param step Amount to increment by
-     */
-    function increment(uint256 step) auth(INCREMENT_ROLE) external {
-        value = value.add(step);
-        Increment(msg.sender, step);
-    }
+  function postComment(string text) external  {
+    Message(text, msg.sender, uint64(now));
+  }
 
-    /**
-     * @notice Decrement the counter by `step`
-     * @param step Amount to decrement by
-     */
-    function decrement(uint256 step) auth(DECREMENT_ROLE) external {
-        value = value.sub(step);
-        Decrement(msg.sender, step);
-    }
+  function setNickname(string name) external auth(POST_COMMENT_ROLE) {
+    nicknames[msg.sender] = name;
+  }
+
+  function setProfilePic(string url) external {
+    profilePics[msg.sender] = url;
+  }
+
 }

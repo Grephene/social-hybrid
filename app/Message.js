@@ -1,6 +1,7 @@
 import React from 'react'
 import { TableRow, TableCell, Text, theme } from '@aragon/ui'
 import styled from 'styled-components'
+import moment from 'moment'
 
 const Message = ({ message }) => (
   <TableRow>
@@ -24,7 +25,7 @@ const Message = ({ message }) => (
       <Text>{message.text}</Text>
     </TableCell>
     <TableCell>
-      <Text>{new Date(message.time)}</Text>
+      <Text>{moment(message.time).format('MMMM Do YYYY')}</Text>
     </TableCell>
   </TableRow>
 )

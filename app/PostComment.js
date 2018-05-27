@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, Text, Button, theme } from '@aragon/ui'
+import { TextInput, Text, theme } from '@aragon/ui'
 import styled from 'styled-components'
 
 const PostComment = ({ author }) => (
